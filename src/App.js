@@ -16,11 +16,11 @@ function App() {
   ];
 
   const productNames = [
-    "Premium Air Filter",
+    "Air Purification",
     "Luxury Cutlery Set",
-    "Modern Water Dispenser",
+    "Water Purification",
     "Professional Cooking Set",
-    "Advanced Juice Extractor"
+    "Premium Items"
   ];
 
   // Function to get a random direction (including diagonals)
@@ -88,7 +88,7 @@ function App() {
         </div>
         
         <div className="slider">
-          <div className={`slide ${direction}`}>
+          <div className={`slide ${direction}`} onClick={handleImageClick}>
             <img 
               src={images[currentIndex]} 
               alt={productNames[currentIndex]}
@@ -97,7 +97,7 @@ function App() {
                 e.target.src = 'https://via.placeholder.com/800x500/cccccc/969696?text=Image+Not+Found';
               }}
             />
-            <div className="click-overlay" onClick={handleImageClick}>
+            <div className="click-overlay">
               <div className="click-text">Click to Visit Store</div>
             </div>
           </div>

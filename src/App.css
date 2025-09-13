@@ -369,3 +369,67 @@
     transform: translateY(0); /* Always show on mobile */
   }
 }
+
+/* Add/Update these styles in your existing App.css */
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.click-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none; /* Allows clicks to pass through to parent */
+}
+
+.slide:hover .click-overlay {
+  opacity: 1;
+}
+
+.click-text {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  pointer-events: none; /* Allows clicks to pass through */
+}
+
+.slide:hover .click-text {
+  transform: translateY(0);
+}
+
+/* Mobile devices - show message on touch */
+@media (max-width: 768px) {
+  .click-overlay {
+    opacity: 0; /* Keep hidden by default on mobile */
+  }
+  
+  /* Show message when user touches the slider */
+  .slider:active .click-overlay,
+  .slider:focus .click-overlay {
+    opacity: 0.7;
+  }
+  
+  .click-text {
+    transform: translateY(0); /* Always show text normally on mobile */
+  }
+}
