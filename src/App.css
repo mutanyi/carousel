@@ -1,38 +1,252 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+  color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.header {
+  padding: 20px 0;
+  width: 100%;
+}
+
+.header h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.header p {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  opacity: 0.9;
+}
+
+.slider-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  margin: 20px 0;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  background: #000;
+  margin: 0 auto;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Slide animations */
+.right {
+  transform: translateX(100%);
+  animation: slideInRight 0.8s ease-in-out forwards;
+}
+
+.left {
+  transform: translateX(-100%);
+  animation: slideInLeft 0.8s ease-in-out forwards;
+}
+
+.top {
+  transform: translateY(-100%);
+  animation: slideInTop 0.8s ease-in-out forwards;
+}
+
+.bottom {
+  transform: translateY(100%);
+  animation: slideInBottom 0.8s ease-in-out forwards;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideInTop {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes slideInBottom {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
   color: white;
+  padding: 12px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  min-width: 100px;
 }
 
-.App-link {
-  color: #61dafb;
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+  gap: 10px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background-color: white;
+  transform: scale(1.2);
+}
+
+.footer {
+  padding: 15px 0 5px;
+  font-size: 0.9rem;
+  opacity: 0.8;
+  width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .App {
+    padding: 15px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .slider {
+    padding-bottom: 60%;
+  }
+  
+  .control-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    min-width: 90px;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding: 12px;
+  }
+  
+  .slider {
+    padding-bottom: 65%;
+  }
+  
+  .header {
+    padding: 10px 0;
+  }
+  
+  .header h1 {
+    font-size: 1.8rem;
+  }
+  
+  .control-btn {
+    padding: 8px 14px;
+    font-size: 0.85rem;
+    min-width: 80px;
+  }
+  
+  .slider-controls {
+    gap: 10px;
+  }
+  
+  .footer {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .header {
+    padding: 10px 0;
+  }
+  
+  .header h1 {
+    margin-bottom: 5px;
+  }
+  
+  .slider-controls {
+    margin: 15px 0;
+  }
+  
+  .slider-dots {
+    margin: 10px 0;
+  }
+}
+
+@media (max-height: 600px) {
+  .header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .header p {
+    font-size: 0.9rem;
+  }
+  
+  .control-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .slider {
+    padding-bottom: 50%;
   }
 }
