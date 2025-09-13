@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 
 function App() {
@@ -23,13 +23,15 @@ function App() {
     "Advanced Juice Extractor"
   ];
 
-  const directions = ['right', 'left', 'top', 'bottom'];
-
-  // Function to get a random direction (excluding the current one)
-  const getRandomDirection = () => {
+  // Function to get a random direction (including diagonals)
+  const getRandomDirection = useCallback(() => {
+    const directions = [
+      'right', 'left', 'top', 'bottom',
+      'top-right', 'top-left', 'bottom-right', 'bottom-left'
+    ];
     const availableDirections = directions.filter(dir => dir !== direction);
     return availableDirections[Math.floor(Math.random() * availableDirections.length)];
-  };
+  }, [direction]);
 
   // Auto-advance the slider
   useEffect(() => {
@@ -42,7 +44,7 @@ function App() {
     }, 4000);
     
     return () => clearInterval(interval);
-  }, [direction, images.length, isAutoPlay]);
+  }, [getRandomDirection, images.length, isAutoPlay]);
 
   const goToSlide = (index) => {
     const newDirection = getRandomDirection();
@@ -72,7 +74,7 @@ function App() {
     <div className="App">
       <div className="header">
         <h1>Kitchen Essentials Showcase</h1>
-        <p>Discover our premium kitchen products</p>
+        <p>Discover our premium kitchen products with dynamic animations</p>
       </div>
       
       <div className="slider-container">
