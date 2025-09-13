@@ -33,6 +33,11 @@ function App() {
     return availableDirections[Math.floor(Math.random() * availableDirections.length)];
   }, [direction]);
 
+  // Function to handle image click - redirect to store
+  const handleImageClick = () => {
+    window.open('https://store.plsss.vip/', '_blank');
+  };
+
   // Auto-advance the slider
   useEffect(() => {
     if (!isAutoPlay) return;
@@ -92,6 +97,9 @@ function App() {
                 e.target.src = 'https://via.placeholder.com/800x500/cccccc/969696?text=Image+Not+Found';
               }}
             />
+            <div className="click-overlay" onClick={handleImageClick}>
+              <div className="click-text">Click to Visit Store</div>
+            </div>
           </div>
         </div>
         
